@@ -8,4 +8,5 @@ import com.ecom.user.entity.RolesEntity;
 @Repository
 public interface RolesRepository extends JpaRepository<RolesEntity, Long>{
 
+	RolesEntity findByUserId(long userId);
 }
