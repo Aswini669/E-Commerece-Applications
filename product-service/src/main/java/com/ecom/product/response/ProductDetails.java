@@ -1,27 +1,12 @@
-package com.ecom.product.entity;
+package com.ecom.product.response;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class ProductDetails {
 
-@Entity
-public class ProductEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long productId;
 	private String prodName;
+	private int stickQty;
 	private int price;
 	private String description;
-
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
+	private String category;
 
 	public String getProdName() {
 		return prodName;
@@ -29,6 +14,14 @@ public class ProductEntity {
 
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
+	}
+
+	public int getStickQty() {
+		return stickQty;
+	}
+
+	public void setStickQty(int stickQty) {
+		this.stickQty = stickQty;
 	}
 
 	public int getPrice() {
@@ -45,6 +38,14 @@ public class ProductEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

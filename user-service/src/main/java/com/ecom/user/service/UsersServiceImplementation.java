@@ -45,7 +45,6 @@ public class UsersServiceImplementation implements UsersService {
 				
 		RolesEntity rolesEntity = rolesRepository.findByUserId(usersEntity.getUserId());
 		
-		
 		UserDetails userDetails = new UserDetails();
 		userDetails.setFirstName(usersEntity.getFirstName());
 		userDetails.setLastName(usersEntity.getLastName());
