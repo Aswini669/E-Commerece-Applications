@@ -2,11 +2,20 @@ package com.ecom.product.response;
 
 public class ProductDetails {
 
+	private long productId;
 	private String prodName;
 	private int stickQty;
 	private int price;
 	private String description;
 	private String category;
+
+	public long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
 
 	public String getProdName() {
 		return prodName;

@@ -18,13 +18,13 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	@PostMapping("products")
+	@PostMapping("/products")
 	public String createProduct(@RequestBody ProductRequest productRequest) {
 		long prodId = productService.createProduct(productRequest);
 		return "your product id: " + prodId;
 	}
 	
-	@GetMapping("products/{productId}")
+	@GetMapping("/products/{productId}")
 	public ResponseEntity<ProductDetails> getProducts(@PathVariable long productId) {
 		ProductDetails productDetails = productService.getProducts(productId);
 		return ResponseEntity.ok(productDetails);

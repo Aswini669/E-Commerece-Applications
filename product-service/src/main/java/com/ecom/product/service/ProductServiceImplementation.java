@@ -3,11 +3,16 @@ package com.ecom.product.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecom.product.client.InventoryClient;
 import com.ecom.product.entity.CategoriesEntity;
 import com.ecom.product.entity.ProductEntity;
+import com.ecom.product.exception.InvalidProductIdException;
+import com.ecom.product.exception.InventoryStockFailedException;
 import com.ecom.product.repository.CategoriesRepository;
 import com.ecom.product.repository.ProductRepository;
 import com.ecom.product.request.ProductRequest;
+import com.ecom.product.request.StockRequest;
+import com.ecom.product.response.InventoryResponse;
 import com.ecom.product.response.ProductDetails;
 
 import jakarta.transaction.Transactional;
@@ -17,9 +22,10 @@ public class ProductServiceImplementation implements ProductService{
 
 	@Autowired
 	ProductRepository productRepository;
-	
 	@Autowired
 	CategoriesRepository categoriesRepository;
+	@Autowired
+	InventoryClient inventoryClient;
 	
 	@Override
 	@Transactional
@@ -35,15 +41,27 @@ public class ProductServiceImplementation implements ProductService{
 		categoriesEntity.setCategory(productRequest.getCategory());
 		categoriesRepository.save(categoriesEntity);
 		
+		StockRequest stockRequest = new StockRequest();
+		stockRequest.setProductId(productEntity.getProductId());
+		stockRequest.setProductName(productEntity.getProdName());
+		stockRequest.setStockQty(productRequest.getStickQty());
+		String result = inventoryClient.createStock(stockRequest);
+		if(result == null) {
+			throw new InventoryStockFailedException("Failed to create stock");
+		}
 		return productEntity.getProductId();
 	}
 
 	@Override
 	public ProductDetails getProducts(long productId) {
-		ProductEntity productEntity = productRepository.findById(productId).get();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(() ->
+		new InvalidProductIdException("No record found ! Invalid product id: " + productId) );
 		CategoriesEntity categoriesEntity = categoriesRepository.findByProductId(productEntity.getProductId());
 		
+		InventoryResponse inventory = inventoryClient.getStock(productId);
+		
 		ProductDetails productDetails = new ProductDetails();
+		productDetails.setProductId(productId);
 		productDetails.setProdName(productEntity.getProdName());
 		productDetails.setPrice(productEntity.getPrice());
 		productDetails.setStickQty(productEntity.getPrice());

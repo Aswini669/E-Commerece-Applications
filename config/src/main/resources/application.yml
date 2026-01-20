@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Aswini669/E-Comm-Easy-App.git
+          uri: https://github.com/Aswini669/E-Commerece-Applications.git
           default-label: main
           clone-on-start: true 
-          search-paths: config
+          search-paths: configecom
