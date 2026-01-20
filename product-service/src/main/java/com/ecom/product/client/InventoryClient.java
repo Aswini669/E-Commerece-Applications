@@ -26,7 +26,9 @@ public interface InventoryClient {
 		System.out.println("Inside Inventory client fallback method");
 		System.out.println(ex.getMessage());
 		
-		throw new InventoryStockFailedException("Failed to create stock");
+//		throw new InventoryStockFailedException("Failed to create stock");
+		return "INVENTORY_SERVICE_UNAVAILABLE";
+
 		
 	}
 	

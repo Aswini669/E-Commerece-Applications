@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.inventory.request.InventoryRequest;
+import com.ecom.inventory.request.UpdateRequest;
 import com.ecom.inventory.response.InventoryResponse;
 import com.ecom.inventory.response.ProductResponse;
 import com.ecom.inventory.service.InventoryService;
@@ -36,5 +38,11 @@ public class InventoryController {
 	@GetMapping("/{productId}")
 	public ResponseEntity<ProductResponse> fetchProduct(@PathVariable long productId){
 		return ResponseEntity.ok(null);
+	}
+	
+	@PutMapping("/reduce")
+	public String updateStock(@RequestBody UpdateRequest updateRequest) {
+		int newStock = inventoryService.updateProductStock(updateRequest);
+		return "product stock updated. New Stock is: " + newStock;
 	}
 }
