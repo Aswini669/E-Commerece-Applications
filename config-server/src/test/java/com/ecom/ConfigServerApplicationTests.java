@@ -1,10 +1,10 @@
-package com.ecom.user;
+package com.ecom;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConfigApplicationTests {
+class ConfigServerApplicationTests {
 
 	@Test
 	void contextLoads() {
