@@ -14,8 +14,23 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
 
+  zipkin:
+    base-url: http://localhost:9411   # changed from host.docker.internal
+    enabled: true
+
+  sleuth:
+    sampler:
+      probability: 1.0
+    propagation-keys:
+      - b3
+      - X-B3-TraceId
+      - X-B3-SpanId
+      - X-B3-ParentSpanId
+      - X-B3-Sampled
+      - X-B3-Flags
+
 server:
-  port: 8084
+  port: 8081
 
 eureka:
   client:
@@ -27,3 +42,16 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p [${spring.application.name},%X{traceId},%X{spanId}] %logger{36} - %msg%n"
