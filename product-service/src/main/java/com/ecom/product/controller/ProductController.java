@@ -26,6 +26,7 @@ public class ProductController {
 	
 	@GetMapping("/products/{productId}")
 	public ResponseEntity<ProductDetails> fetchProducts(@PathVariable long productId) {
+		System.out.println("Inside fetch product service................................................");
 		ProductDetails productDetails = productService.getProducts(productId);
 		return ResponseEntity.ok(productDetails);
 	}

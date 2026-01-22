@@ -4,6 +4,7 @@ public class PaymentRequest {
 
 	private int orderId;
 	private int amount;
+	private String paymentType;
 
 	public int getOrderId() {
 		return orderId;
@@ -19,6 +20,14 @@ public class PaymentRequest {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}
 
 }

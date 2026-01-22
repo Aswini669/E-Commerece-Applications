@@ -3,58 +3,49 @@ package com.ecom.product.response;
 public class ProductDetails {
 
 	private long productId;
-	private String prodName;
-	private int stickQty;
-	private int price;
-	private String description;
+	private String productName;
 	private String category;
-
+	private int price;
+	private int stockQty;
+	private String description;
+	
 	public long getProductId() {
 		return productId;
 	}
-
 	public void setProductId(long productId) {
 		this.productId = productId;
 	}
-
-	public String getProdName() {
-		return prodName;
+	public String getProductName() {
+		return productName;
 	}
-
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-
-	public int getStickQty() {
-		return stickQty;
+	public String getCategory() {
+		return category;
 	}
-
-	public void setStickQty(int stickQty) {
-		this.stickQty = stickQty;
+	public void setCategory(String category) {
+		this.category = category;
 	}
-
 	public int getPrice() {
 		return price;
 	}
-
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	public int getStockQty() {
+		return stockQty;
+	}
+	public void setStockQty(int stockQty) {
+		this.stockQty = stockQty;
+	}
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	
 
 }
