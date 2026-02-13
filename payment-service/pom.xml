@@ -55,11 +55,14 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
+<<<<<<< HEAD
 <!-- Actuator for exposing tracing info -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+=======
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 
 		<!-- Micrometer Tracing Bridge for Brave (Sleuth replacement) -->
 		<dependency>

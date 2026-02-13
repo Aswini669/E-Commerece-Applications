@@ -14,6 +14,10 @@ public class KafkaPaymentProducer {
 	
 	public void sendMessage(String topic, String message) {
 		kafkaTemplate.send(topic, message);
+<<<<<<< HEAD
 		System.out.println("Message sent to kafka..");
+=======
+		System.out.println("message sent to kafka");
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	}
 }

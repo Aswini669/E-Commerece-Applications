@@ -1,9 +1,13 @@
 package com.ecom.cart.controller;
 
+<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecom.cart.request.CartRequest;
 import com.ecom.cart.request.RemoveRequest;
 import com.ecom.cart.service.CartService;
+<<<<<<< HEAD
 
 @RestController
 @RequestMapping("/cart")
@@ -35,5 +40,24 @@ public class CartController {
 		logger.info("Delete Cart item request recieved: {}",removeRequest);
 		cartService.removeCartProduct(removeRequest);
 		return ResponseEntity.ok("Item removed successfully");
+=======
+
+@RestController
+@RequestMapping("/cart")
+public class CartController {
+	
+	@Autowired
+	CartService cartService;
+
+	@PostMapping("/add")
+	public String addCart(@RequestBody CartRequest cartRequest) {
+		long cartId = cartService.addCart(cartRequest);
+		return "your cart id: " + cartId;
+	}
+	
+	@DeleteMapping("/remove")
+	public void removeCart(@RequestBody RemoveRequest removeRequest) {
+		cartService.removeCart(removeRequest);
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	}
 }

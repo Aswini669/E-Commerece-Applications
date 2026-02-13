@@ -10,6 +10,7 @@ import com.ecom.cart.response.ErrorResponse;
 public class CartExceptionHandle {
 
 	@ExceptionHandler(CartNotFoundException.class)
+<<<<<<< HEAD
 	public ResponseEntity<ErrorResponse> cartNotFoundExceptionHandle(CartNotFoundException ex){
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setErrorCode("CE-719");
@@ -21,6 +22,11 @@ public class CartExceptionHandle {
 	public ResponseEntity<ErrorResponse> noProductFoundExceptionHandle(NoProductFoundException ex){
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setErrorCode("CE-720");
+=======
+	public ResponseEntity<ErrorResponse> cartNotFoundExceptionHanlder(CartNotFoundException ex){
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrCode("CE-8970");
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 		errorResponse.setErrMsg(ex.getMessage());
 		return ResponseEntity.ok(errorResponse);
 	}

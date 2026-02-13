@@ -1,6 +1,10 @@
 spring:
   application:
+<<<<<<< HEAD
     name: payment-service
+=======
+    name: paymnet-service
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 
   profiles:
     active: dev
@@ -14,6 +18,24 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+<<<<<<< HEAD
+=======
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecommdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8083
+
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 # ================= BUSINESS CONFIG =================
 kafka:
   topics:

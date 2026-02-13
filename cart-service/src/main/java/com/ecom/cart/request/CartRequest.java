@@ -2,10 +2,16 @@ package com.ecom.cart.request;
 
 public class CartRequest {
 
+<<<<<<< HEAD
 	private long cartId;
 	private long userId;
 	private long productId;
 	private String productName;
+=======
+	private long cartId; // 0 = create new cart
+	private long userId;
+	private long productId;
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	private int quantity;
 
 	public long getCartId() {
@@ -32,6 +38,7 @@ public class CartRequest {
 		this.productId = productId;
 	}
 
+<<<<<<< HEAD
 	public String getProductName() {
 		return productName;
 	}
@@ -40,6 +47,8 @@ public class CartRequest {
 		this.productName = productName;
 	}
 
+=======
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	public int getQuantity() {
 		return quantity;
 	}

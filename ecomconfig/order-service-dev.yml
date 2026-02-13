@@ -1,13 +1,9 @@
 spring:
   application:
-    name: user-service
+    name: order-service
 
   datasource:
-<<<<<<< HEAD
-    url: jdbc:mysql://localhost:3306/ecommdb   # changed from mysql → localhost
-=======
     url: jdbc:mysql://localhost:3306/ecommdb
->>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
     username: root
     password: A9861@wini#
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,8 +13,6 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
-<<<<<<< HEAD
-=======
 
   sleuth:
     sampler:
@@ -31,14 +25,10 @@ spring:
       - X-B3-Sampled
       - X-B3-Flags
 
-zipkin:
-  base-url: http://localhost:9411
-  enabled: true
+server:
+  port: 8086
 
 eureka:
-  instance:
-    prefer-ip-address: true        
-    hostname: localhost            
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
@@ -48,6 +38,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+zipkin:
+  base-url: http://localhost:9411
+  enabled: true
 
 management:
   tracing:
@@ -61,7 +55,3 @@ management:
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p [${spring.application.name},%X{traceId},%X{spanId}] %logger{36} - %msg%n"
-
-server:
-  port: 8087
->>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a

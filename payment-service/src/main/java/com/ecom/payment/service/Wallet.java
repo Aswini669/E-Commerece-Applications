@@ -18,13 +18,21 @@ public class Wallet implements PaymentService{
 	@Autowired
 	PaymentRepository paymentRepository;
 	@Autowired
+<<<<<<< HEAD
 	KafkaPaymentProducer kafkaPaymentProducer;
 	
 	@Value("${kafka.topics.paymentSuccess}")
 	String paymentSuccessTopic;
 	@Value("${kafka.topics.paymentFailed}")
 	String paymentFailedTopic;
+=======
+	KafkaPaymentProducer kafaKafkaPaymentProducer;
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	
+	@Value("${kafka.topics.paymentSuccessTopic}")
+	String paymentSuccessTopic;
+	@Value("${kafka.topics.paymentFailedTopic}")
+	String paymentFailedTopic;
 	@Override
 	@Transactional
 	public PaymentResponse processPayment(PaymentRequest paymentRequest) {

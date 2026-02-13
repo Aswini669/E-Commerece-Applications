@@ -9,4 +9,4 @@ spring:
           uri: https://github.com/Aswini669/E-Commerece-Applications
           default-label: main
           clone-on-start: true 
-          search-paths: ecomconfig
+          search-paths: ecommerececonfig

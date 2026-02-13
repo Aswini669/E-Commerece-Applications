@@ -14,6 +14,7 @@ public class CartItems {
 	private long cartId;
 	private long productId;
 	private String productName;
+<<<<<<< HEAD
 	private int price;
 	private int quantity;
 
@@ -24,6 +25,10 @@ public class CartItems {
 	public void setCartItemId(long cartItemId) {
 		this.cartItemId = cartItemId;
 	}
+=======
+	private int quantity;
+	private int price;
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 
 	public long getCartId() {
 		return cartId;
@@ -49,6 +54,7 @@ public class CartItems {
 		this.productName = productName;
 	}
 
+<<<<<<< HEAD
 	public int getPrice() {
 		return price;
 	}
@@ -57,6 +63,8 @@ public class CartItems {
 		this.price = price;
 	}
 
+=======
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 	public int getQuantity() {
 		return quantity;
 	}
@@ -65,4 +73,15 @@ public class CartItems {
 		this.quantity = quantity;
 	}
 
+<<<<<<< HEAD
+=======
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 }

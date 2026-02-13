@@ -1,5 +1,6 @@
 package com.ecom.cart.service;
 
+<<<<<<< HEAD
 import java.time.Duration;
 import java.util.List;
 
@@ -16,6 +17,19 @@ import com.ecom.cart.repository.CartItemsRepository;
 import com.ecom.cart.repository.CartRepository;
 import com.ecom.cart.request.CartRequest;
 import com.ecom.cart.request.RedisCart;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecom.cart.client.ProductClient;
+import com.ecom.cart.controller.CartController;
+import com.ecom.cart.entity.Cart;
+import com.ecom.cart.entity.CartItems;
+import com.ecom.cart.exception.CartNotFoundException;
+import com.ecom.cart.repository.CartItemsRepository;
+import com.ecom.cart.repository.CartRepository;
+import com.ecom.cart.request.CartRequest;
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 import com.ecom.cart.request.RemoveRequest;
 import com.ecom.cart.response.ProductResponse;
 
@@ -24,6 +38,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class CartServiceImplementation implements CartService{
 
+<<<<<<< HEAD
 	@Autowired
 	ProductClient productClient;
 	@Autowired
@@ -44,6 +59,24 @@ public class CartServiceImplementation implements CartService{
 			cart = cartRepository.findById(cartRequest.getCartId())
 					.orElseThrow(() -> 
 					new CartNotFoundException("No record found for cart id: " + cartRequest.getCartId()));
+=======
+	
+	@Autowired
+	CartItemsRepository cartItemsRepository;
+	@Autowired
+	CartRepository cartRepository;
+	
+	@Autowired
+	ProductClient productClient;
+	
+	@Override
+	@Transactional
+	public long addCart(CartRequest cartRequest) {
+		Cart cart;
+		if(cartRequest.getCartId() > 0) {
+			cart = cartRepository.findById(cartRequest.getCartId())
+					.orElseThrow(() -> new CartNotFoundException("No record for cartId: " + cartRequest.getCartId()));
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 		}
 		else {
 			cart = new Cart();
@@ -54,6 +87,7 @@ public class CartServiceImplementation implements CartService{
 		}
 		
 		ProductResponse response = productClient.fetchProduct(cartRequest.getProductId());
+<<<<<<< HEAD
 		
 		CartItems cartItem = cartItemsRepository.findByCartIdAndProductId(cart.getCartId(), cartRequest.getProductId()).orElse(null);
 		
@@ -73,11 +107,33 @@ public class CartServiceImplementation implements CartService{
 		int addedQty = cartRequest.getQuantity();
 		int addedPrice = addedQty * response.getPrice();
 		
+=======
+
+		CartItems cartItems = cartItemsRepository.findByCartIdAndProductId(cart.getCartId(), cartRequest.getProductId());
+		
+		if(cartItems != null) {
+			cartItems.setQuantity(cartItems.getQuantity() + cartRequest.getQuantity());
+		}else {
+			cartItems = new CartItems();
+			cartItems.setCartId(cart.getCartId());
+			cartItems.setProductId(cartRequest.getProductId());
+			cartItems.setProductName(response.getProductName());
+			cartItems.setPrice(response.getPrice());
+			cartItems.setQuantity(cartRequest.getQuantity());
+		}
+		
+		cartItemsRepository.save(cartItems);
+		
+		int addedQty = cartRequest.getQuantity();
+		int addedPrice = addedQty * response.getPrice();
+	
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 		cart.setTotalQty(cart.getTotalQty() + addedQty);
 		cart.setTotalPrice(cart.getTotalPrice() + addedPrice);
 		
 		cartRepository.save(cart);
 		
+<<<<<<< HEAD
 		//Adding cart and cart item to redis
 		List<CartItems> allItems = cartItemsRepository.findByCartId(cart.getCartId());
 		RedisCart redisCart = new RedisCart();
@@ -88,10 +144,13 @@ public class CartServiceImplementation implements CartService{
 		//store cart in Redis with 30min TTL
 		redisTemplate.opsForValue().set(redisKey, redisCart, CART_TTL);
 		
+=======
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 		return cart.getCartId();
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void removeCartProduct(RemoveRequest removeRequest) {
 		long cartId = removeRequest.getCartId();
 		long productId = removeRequest.getProductId();
@@ -102,6 +161,16 @@ public class CartServiceImplementation implements CartService{
 		CartItems cartItems = cartItemsRepository.findByCartIdAndProductId(cartId, productId).orElseThrow(() 
 				-> new NoProductFoundException("No product found in cart for product id: " + productId));
 		
+=======
+	@Transactional
+	public void removeCart(RemoveRequest removeRequest) {
+		long cartId = removeRequest.getCartId();
+		long productId = removeRequest.getProductId();
+		
+		Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException("No record found for cartId: " + cartId));
+		
+		CartItems cartItems = cartItemsRepository.findByCartIdAndProductId(cartId, productId);
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 		cartItemsRepository.delete(cartItems);
 		
 		if(cartItemsRepository.countByCartId(cartId) == 0) {
@@ -109,4 +178,8 @@ public class CartServiceImplementation implements CartService{
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 7b34a51bc93aeda4d71178caf8d35acdf12d1e1a
 }
