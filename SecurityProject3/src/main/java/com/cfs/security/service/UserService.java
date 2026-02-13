@@ -1,0 +1,57 @@
+package com.cfs.security.service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.cfs.security.entity.AppUser;
+import com.cfs.security.entity.Role;
+import com.cfs.security.repository.RoleRepository;
+import com.cfs.security.repository.UserRepository;
+import com.cfs.security.request.UserRequest;
+
+@Service
+public class UserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	public void saveUsers(List<UserRequest> userRequests) {
+
+        for (UserRequest req : userRequests) {
+
+            AppUser user = new AppUser();
+            user.setUsername(req.getUsername());
+            user.setPassword(encoder.encode(req.getPassword()));
+            user.setEnabled(true);
+
+            Set<Role> roleSet = new HashSet<>();
+
+            for (String roleName : req.getRoles()) {
+
+                Role role = roleRepository.findByName(roleName)
+                        .orElseGet(() -> {
+                            Role newRole = new Role();
+                            newRole.setName(roleName);
+                            return roleRepository.save(newRole);
+                        });
+
+                roleSet.add(role);
+            }
+
+            user.setRoles(roleSet);
+
+            userRepository.save(user);
+        }
+    }
+}
